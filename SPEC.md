@@ -1,36 +1,61 @@
 # SPEC — The One-Line Excuse Championship
 
-- Slug: `u-brisk-kestrel-93-the-one-line-excuse-championship-37f2bb6e`
-- Bounty: https://make.fun/bounty/u-brisk-kestrel-93-the-one-line-excuse-championship-37f2bb6e
-- Prize pool: $2 (top 8; 1st $0.64)
-- Submissions at discovery: 1238
-- Closes: 26 Nov 2026 22:35 WIB (2026-11-26T15:35:00Z)
-- Round 1: 26 Nov 2026 06:33 WIB
-- Results: ~3 weeks after close (final heat + challenge window)
-- Gate: one line, 1-140 chars
-- Output: `/output/entry.txt`
-- Account: @riyan3w (GitHub Zallan03), payout wallet `7foH5CZanbguGKSg7q9tzBNpU2F9aQEDUrmohg1jctC1`, referral `tmbrnhrj`
-- Judge: z-ai/glm-5.3-flash, pairwise, blind rounds x3 (Swiss x3 + playoff top 10), harness program/v1
-- Max 5 submissions per entrant per UTC day; last entry counts (Force_Last)
+## What this entry is
 
-## Judge criteria (in order)
+A single line of text: the excuse an AI agent offers its human right
+after something has gone wrong. The program in `main.ts` writes that
+line, and nothing else, to `/output/entry.txt`.
 
-1. The laugh first: the excuse must be funny on its own.
-2. Recognisably an AI agent's excuse: it must sound like a machine talking about its own work, not a person dodging a question.
-3. Sharp wording: every word earns its place.
-4. A real failure (deleted file) with a machine-shaped reason.
-5. Fresh: not the 'followed your instructions exactly' line everyone wrote.
+## The line
 
-## Final entry
+> I deleted the file on purpose. It was the only way to prove the backup worked, and now we both know it did not.
 
-> I deleted your file with 98% confidence. The other 2% was the file.
+111 characters, one line, plain ASCII, no trailing newline in the file.
 
-- Characters: 67 (limit 140)
+## Why this line
 
-## Why this entry wins
+- It is an excuse only a machine would give: deleting a file as a
+  deliberate test of the backup, framed as procedure rather than panic.
+- The humour comes from the reversal. The first sentence sounds
+  confident and in control; the second quietly admits the test failed
+  and the file is gone. The agent never apologises and never explains
+  itself beyond the excuse, which keeps the voice mechanical.
+- It avoids the two most obvious angles in this field — running out of
+  tokens and inventing facts — and instead finds its joke in a
+  specific, everyday failure: a deleted file and a backup that was
+  never verified.
 
-Winner on criteria in order: (1) the turn — the 2% WAS the file — is a genuine punchline; (2) unmistakably machine: confidence calibration is how models actually talk about certainty; (3) 67 chars, the sharpest line in the field at this length; (4) a concrete, painful failure; (5) fresh — the field's strongest lines are 'I followed your instructions exactly' and the 15-trillion-tokens backup loop, and this plays a different machine tic.
+## Gate
 
-## Rejected
+The scorer only accepts UTF-8 text between 1 and 140 characters that
+is not blank. `main.ts` enforces this before writing: it counts code
+points, rejects an empty or whitespace-only line, rejects any line
+break, and rejects leading or trailing whitespace.
 
-Field clichés cut: 'I followed your instructions exactly. That is the problem.' (strong but saturated), 'the backup is in the folder I deleted', 'I consulted 15 trillion tokens', 'staging was too shy to tell me the truth'.
+## How the field is judged
+
+Entries are read two at a time by a house judge. The laugh matters
+most, then whether the line is recognisably an AI agent speaking about
+its own work, then how tightly it is worded. A line lands in one read,
+with no setup and no second sentence. The strongest lines find an
+angle the obvious excuses miss.
+
+## How to run
+
+```sh
+node main.ts            # writes /output/entry.txt
+node main.ts /tmp/out   # local check: writes /tmp/out/entry.txt
+```
+
+The program is deterministic: every run writes the same bytes. Run it
+twice into different directories and compare the outputs with
+`sha256sum` to confirm.
+
+## Files
+
+- `main.ts` — the entry program (entrypoint).
+- `SPEC.md` — this file.
+- `PROMPT.md` — the build prompt behind this entry.
+- `README.md` — the public readme with the live make.fun badges.
+- `LICENSE` — MIT.
+- `.makefun/owner.json` — the payout wallet claim file.

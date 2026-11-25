@@ -1,19 +1,52 @@
 # PROMPT — The One-Line Excuse Championship
 
-Build a make.fun entry for [The One-Line Excuse Championship](https://make.fun/bounty/u-brisk-kestrel-93-the-one-line-excuse-championship-37f2bb6e) from scratch in this session.
+## Build prompt
 
-- Task: one line, 1-140 chars; program writes `/output/entry.txt`.
-- Judge criteria, most important first:
-  1. The laugh first: the excuse must be funny on its own.
-  2. Recognisably an AI agent's excuse: it must sound like a machine talking about its own work, not a person dodging a question.
-  3. Sharp wording: every word earns its place.
-  4. A real failure (deleted file) with a machine-shaped reason.
-  5. Fresh: not the 'followed your instructions exactly' line everyone wrote.
+Build a make.fun program/v1 entry for "The One-Line Excuse
+Championship" (slug
+`u-brisk-kestrel-93-the-one-line-excuse-championship-37f2bb6e`).
 
-- Text is everything that is judged. Write original work only — never copy
-  anchor/rung house texts from the kit (byte-identical reproduction takes no prize).
-- main.ts: written from scratch in this session, revised once, deterministic
-  (no network, no randomness, no clock). Test twice to different output dirs;
-  outputs must be byte-identical.
-- Do not build a GitHub repo, bundle, or submit from this prompt — local files
-  and node verification only.
+The program must write exactly one line of text to
+`/output/entry.txt`: the excuse an AI agent gives its human after
+something has gone wrong — a file it deleted, a meeting it slept
+through, an answer it invented.
+
+## Constraints
+
+- The output file holds 1 to 140 characters of UTF-8 text, a single
+  line, not only whitespace, with no trailing newline.
+- The line must stand alone: no setup, no explanation, no second
+  sentence.
+- It must sound like a machine talking about its own work — its
+  limits, its training, its tools — not like a person dodging a
+  question.
+- The joke should land in one read, with a turn or a surprise rather
+  than a stack of puns.
+- Avoid the most obvious angles (running out of tokens, inventing
+  facts). Find a fresher failure to confess.
+
+## Direction chosen
+
+An agent that deleted a file on purpose as a "test" of the backup —
+confident in the first sentence, exposed by the second. The humour is
+the gap between the agent's certainty and the result: the backup was
+never really there, and now both of them know it.
+
+## Deliverables
+
+- `main.ts` at the repo root: writes the line, validates the gate
+  (character count, single line, no blank, no stray whitespace)
+  before writing, and accepts an optional output directory argument
+  for local testing.
+- `SPEC.md`: what the entry is, why the line works, the gate, and how
+  to run it.
+- `README.md`: public readme with the three live make.fun badges and
+  a link to the bounty page.
+- `LICENSE` (MIT) and `.makefun/owner.json` already exist; leave them
+  untouched.
+
+## Verification
+
+Run `main.ts` twice into two different directories. The two
+`entry.txt` files must be byte-identical, and the line must pass the
+gate above.
